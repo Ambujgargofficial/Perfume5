@@ -105,7 +105,13 @@
             Sparkles: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L12 3Z"/></svg>,
             Audio: () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>,
             Globe: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
-            
+            CheckCircle: () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>,
+            XCircle: () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>,
+            User: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+            Phone: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>,
+            Mail: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>,
+            Exit: () => <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>,
+
             // Rating Icons
             StronglyDisagree: () => <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>,
             Disagree: () => <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>,
@@ -134,6 +140,23 @@
             agree: { en: "Strongly Agree", hi: "पूर्णतः सहमत" },
             primaryBlock: { en: "Primary Block", hi: "मुख्य अवरोध" },
             secondaryBlock: { en: "Secondary Block", hi: "द्वितीयक अवरोध" },
+            // New UI Text for AI Guide
+            aiGuideTitle: { en: "Would You Like to Choose AI Empowered Guide Healing Path?", hi: "क्या आप AI सशक्त मार्गदर्शक उपचार पथ चुनना चाहेंगे?" },
+            yes: { en: "Yes", hi: "हाँ" },
+            no: { en: "No", hi: "नहीं" },
+            gettingTitle: { en: "What Will You Be Getting", hi: "आपको क्या मिलेगा" },
+            missingTitle: { en: "What Will You Be Missing", hi: "आप क्या खो देंगे" },
+            registerBtn: { en: "Register Your Interest", hi: "अपनी रुचि पंजीकृत करें" },
+            joinBtn: { en: "Join SoulSync", hi: "SoulSync से जुड़ें" },
+            exitBtn: { en: "Exit", hi: "बाहर निकलें" },
+            
+            // Form Text
+            formName: { en: "Your Name", hi: "आपका नाम" },
+            formContact: { en: "Contact No.", hi: "संपर्क नंबर" },
+            formMail: { en: "Mail ID (Optional)", hi: "मेल आईडी (वैकल्पिक)" },
+            submitBtn: { en: "Submit", hi: "जमा करें" },
+            thankYou: { en: "Thank You !! We Will Get In Touch When We Go Live Very Soon", hi: "धन्यवाद !! हम बहुत जल्द लाइव होने पर आपसे संपर्क करेंगे" },
+
             healingPathBtn: { en: "Begin Healing Path", hi: "उपचार पथ शुरू करें" },
             healingTitle: { en: "Healing Path", hi: "उपचार पथ" },
             personalized: { en: "Personalized Healing", hi: "व्यक्तिगत उपचार" },
@@ -320,6 +343,10 @@
             const [lowestChakras, setLowestChakras] = useState([]);
             const [animKey, setAnimKey] = useState(0);
             const [isTransitioning, setIsTransitioning] = useState(false); 
+            const [guideChoice, setGuideChoice] = useState(null); // 'yes' or 'no'
+            const [showRegForm, setShowRegForm] = useState(false);
+            const [regSubmitted, setRegSubmitted] = useState(false);
+            const [formData, setFormData] = useState({ name: '', contact: '', email: '' });
 
             // Helper for Text
             const t = (obj) => obj[lang] || obj['en'];
@@ -388,6 +415,32 @@
                 }).catch(console.error);
 
                 setView('energy_analysis');
+            };
+
+            const handleGuideSelection = (choice) => {
+                setGuideChoice(choice);
+                setShowRegForm(false);
+                setView('ai_guide_intro');
+            };
+
+            const handleRegSubmit = (e) => {
+                e.preventDefault();
+                setRegSubmitted(true);
+                // Send Lead Data to Google Sheet
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        timestamp: new Date().toISOString(), 
+                        type: "LEAD",
+                        ...formData, 
+                        ...finalResults 
+                    })
+                }).catch(console.error);
+            };
+
+            const handleInputChange = (e) => {
+                setFormData({ ...formData, [e.target.name]: e.target.value });
             };
 
             // 1. WELCOME
@@ -534,7 +587,7 @@
 
                             {/* UNIFIED DASHBOARD CONTAINER */}
                             <div className="dashboard-container mb-8 grid grid-cols-2 divide-x divide-y divide-stone-200/50">
-                                
+                                {/* ... (Chart Content Remains Same) ... */}
                                 {/* TOP LEFT: OVERALL BLOCKAGE */}
                                 <div className="p-6 flex flex-col items-center justify-center text-center">
                                     <h2 className={`text-sm text-[#3e3a36] mb-2 font-bold ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.harmonyScore)}</h2>
@@ -619,13 +672,188 @@
                                         {t(secondary.descPoints).map((pt, i) => <li key={i}>• {pt}</li>)}
                                     </ul>
                                 </div>
-
                             </div>
 
-                            <button onClick={() => setView('healing_path')} className="action-btn w-full py-5 rounded-xl font-bold text-sm shadow-sm hover:shadow-md">
-                                {t(UI_TEXT.healingPathBtn)} →
-                            </button>
+                            {/* --- NEW GUIDE SELECTION SECTION --- */}
+                            <div className="soft-card p-6 rounded-[1.5rem] text-center">
+                                <h3 className={`text-sm font-serif font-bold text-[#3e3a36] mb-6 leading-relaxed ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                    {t(UI_TEXT.aiGuideTitle)}
+                                </h3>
+                                
+                                <div className="flex gap-4">
+                                    <button 
+                                        onClick={() => handleGuideSelection('no')} 
+                                        className="flex-1 bg-rose-50 border border-rose-200 text-rose-700 py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-rose-100 transition-all flex items-center justify-center gap-2"
+                                    >
+                                        <Icons.XCircle /> {t(UI_TEXT.no)}
+                                    </button>
+                                    
+                                    <button 
+                                        onClick={() => handleGuideSelection('yes')} 
+                                        className="flex-1 bg-emerald-50 border border-emerald-200 text-emerald-700 py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-emerald-100 transition-all flex items-center justify-center gap-2"
+                                    >
+                                        <Icons.CheckCircle /> {t(UI_TEXT.yes)}
+                                    </button>
+                                </div>
+                            </div>
 
+                        </div>
+                    </div>
+                );
+            }
+
+            // 3.5 AI GUIDE INTRO (New Screen)
+            if (view === 'ai_guide_intro') {
+                
+                // --- THANK YOU STATE ---
+                if (regSubmitted) {
+                    return (
+                        <div className="h-full flex flex-col items-center justify-center p-8 animate-enter text-center">
+                            <div className="soft-card p-10 rounded-[2rem] w-full max-w-sm flex flex-col items-center">
+                                <div className="mb-6 p-4 bg-emerald-50 rounded-full shadow-sm text-emerald-600">
+                                    <Icons.CheckCircle />
+                                </div>
+                                <h2 className={`text-xl font-serif text-[#3e3a36] leading-relaxed ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                    {t(UI_TEXT.thankYou)}
+                                </h2>
+                                <button onClick={() => window.location.reload()} className="mt-8 text-xs text-[#7c746e] uppercase tracking-widest hover:text-[#3e3a36] transition-colors">
+                                    Return to Home
+                                </button>
+                            </div>
+                        </div>
+                    );
+                }
+
+                // --- REGISTRATION FORM STATE ---
+                if (showRegForm) {
+                    return (
+                        <div className="h-full flex flex-col items-center justify-center p-6 animate-enter">
+                            <div className="soft-card p-8 rounded-[2rem] w-full max-w-sm relative">
+                                <button onClick={() => setShowRegForm(false)} className="absolute top-6 right-6 text-[#7c746e] hover:text-[#3e3a36]">✕</button>
+                                
+                                <div className="text-center mb-6">
+                                    <div className="inline-flex p-3 bg-white rounded-full shadow-sm text-[#d1b676] mb-3">
+                                        <Icons.User />
+                                    </div>
+                                    <h2 className={`text-lg font-bold text-[#3e3a36] ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.registerBtn)}</h2>
+                                </div>
+
+                                <form onSubmit={handleRegSubmit} className="space-y-4">
+                                    <div>
+                                        <label className={`block text-xs font-bold text-[#7c746e] uppercase tracking-wider mb-1 ml-1 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.formName)}</label>
+                                        <div className="relative">
+                                            <input 
+                                                required
+                                                type="text" 
+                                                name="name"
+                                                value={formData.name}
+                                                onChange={handleInputChange}
+                                                className="w-full bg-white/60 border border-[#e6dbd2] rounded-xl py-3 pl-10 pr-4 text-sm text-[#3e3a36] focus:outline-none focus:border-[#d1b676] transition-colors"
+                                                placeholder="..."
+                                            />
+                                            <div className="absolute left-3 top-3 text-[#7c746e] opacity-50"><Icons.User /></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className={`block text-xs font-bold text-[#7c746e] uppercase tracking-wider mb-1 ml-1 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.formContact)}</label>
+                                        <div className="relative">
+                                            <input 
+                                                required
+                                                type="tel" 
+                                                name="contact"
+                                                value={formData.contact}
+                                                onChange={handleInputChange}
+                                                className="w-full bg-white/60 border border-[#e6dbd2] rounded-xl py-3 pl-10 pr-4 text-sm text-[#3e3a36] focus:outline-none focus:border-[#d1b676] transition-colors"
+                                                placeholder="+91..."
+                                            />
+                                            <div className="absolute left-3 top-3 text-[#7c746e] opacity-50"><Icons.Phone /></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className={`block text-xs font-bold text-[#7c746e] uppercase tracking-wider mb-1 ml-1 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.formMail)}</label>
+                                        <div className="relative">
+                                            <input 
+                                                type="email" 
+                                                name="email"
+                                                value={formData.email}
+                                                onChange={handleInputChange}
+                                                className="w-full bg-white/60 border border-[#e6dbd2] rounded-xl py-3 pl-10 pr-4 text-sm text-[#3e3a36] focus:outline-none focus:border-[#d1b676] transition-colors"
+                                                placeholder="@..."
+                                            />
+                                            <div className="absolute left-3 top-3 text-[#7c746e] opacity-50"><Icons.Mail /></div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" className="action-btn w-full py-4 rounded-xl font-bold text-sm shadow-md mt-4">
+                                        {t(UI_TEXT.submitBtn)}
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    )
+                }
+
+                // --- STANDARD SELECTION VIEW ---
+                const isYes = guideChoice === 'yes';
+                
+                const benefits = [
+                    "AI As Your Private Healer",
+                    "Bespoke Rituals, Not Generic",
+                    "Wisdom Of 5000 Years Of Vedic Knowledge",
+                    "Proof Of Progress You Can See",
+                    "Your Personal Coach Always Available On 24 X 7"
+                ];
+
+                const containerClass = isYes 
+                    ? "bg-emerald-50/50 border-emerald-100" 
+                    : "bg-rose-50/50 border-rose-100";
+                
+                const textClass = isYes ? "text-emerald-900" : "text-rose-900";
+                const iconColor = isYes ? "text-emerald-600" : "text-rose-600 opacity-60";
+                
+                return (
+                    <div className="h-full flex flex-col items-center justify-center p-8 animate-enter relative">
+                        <div className={`soft-card p-8 rounded-[2rem] w-full max-w-sm flex flex-col items-center relative overflow-hidden ${containerClass}`}>
+                            
+                            <div className={`mb-6 p-4 bg-white rounded-full shadow-sm ${iconColor}`}>
+                                {isYes ? <Icons.Sparkles /> : <Icons.Alert />}
+                            </div>
+
+                            <h2 className={`text-xl font-serif text-[#3e3a36] mb-6 text-center leading-tight ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                {isYes ? t(UI_TEXT.gettingTitle) : t(UI_TEXT.missingTitle)}
+                            </h2>
+
+                            <ul className="w-full space-y-4 mb-8">
+                                {benefits.map((benefit, i) => (
+                                    <li key={i} className="flex items-start gap-3 text-sm text-[#5d5854]">
+                                        <span className={`mt-0.5 shrink-0 ${iconColor}`}>
+                                            {isYes ? 
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 
+                                                : 
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                            }
+                                        </span>
+                                        <span className={!isYes ? "opacity-70" : ""}>{benefit}</span>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            {isYes ? (
+                                <button onClick={() => setShowRegForm(true)} className="w-full bg-[#3e3a36] text-[#f4ede7] py-4 rounded-xl font-bold text-sm shadow-md flex items-center justify-center gap-2 hover:bg-black transition-colors">
+                                    <Icons.Sparkles /> {t(UI_TEXT.registerBtn)}
+                                </button>
+                            ) : (
+                                <div className="flex flex-col w-full gap-3">
+                                    <button onClick={() => setShowRegForm(true)} className="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold text-sm shadow-md flex items-center justify-center gap-2 hover:bg-emerald-700 transition-colors">
+                                        {t(UI_TEXT.joinBtn)}
+                                    </button>
+                                    <button onClick={() => window.location.reload()} className="w-full border border-rose-200 text-rose-700 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-rose-50 transition-colors">
+                                        <Icons.Exit /> {t(UI_TEXT.exitBtn)}
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 );
