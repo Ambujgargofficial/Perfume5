@@ -129,9 +129,9 @@
             subtitle: { en: "A Reflection of Your Chakra", hi: "आपके चक्रों का प्रतिबिंब" },
             beginBtn: { en: "Begin Analysis", hi: "विश्लेषण प्रारंभ करें" },
             question: { en: "Question", hi: "प्रश्न" },
-            disagree: { en: "Disagree", hi: "असहमत" },
+            disagree: { en: "Strongly Disagree", hi: "पूर्णतः असहमत" },
             balance: { en: "Balance", hi: "संतुलन" },
-            agree: { en: "Agree", hi: "सहमत" },
+            agree: { en: "Strongly Agree", hi: "पूर्णतः सहमत" },
             primaryBlock: { en: "Primary Block", hi: "मुख्य अवरोध" },
             secondaryBlock: { en: "Secondary Block", hi: "द्वितीयक अवरोध" },
             healingPathBtn: { en: "Begin Healing Path", hi: "उपचार पथ शुरू करें" },
@@ -146,7 +146,7 @@
             playAudio: { en: "Play Audio", hi: "ऑडियो चलाएं" },
             gentle: { en: "Gentle Practice", hi: "सौम्य अभ्यास" },
             exploreBtn: { en: "Explore Deeper Practices", hi: "गहन अभ्यास देखें" },
-            harmonyScore: { en: "Your Harmony Score", hi: "आपका हारमनी स्कोर" },
+            harmonyScore: { en: "Your Chakra Blockages", hi: "आपके चक्र अवरोध" }, // Updated Text
             alignment: { en: "Alignment Complete", hi: "संरेखण पूर्ण" },
             outOf: { en: "Out of 100", hi: "100 में से" },
             breakdown: { en: "Full Breakdown", hi: "पूर्ण विवरण" },
@@ -483,10 +483,6 @@
                                     </h2>
                                 </div>
                                 
-                                <div className="text-center text-xs text-[#7c746e] mb-3 font-medium">
-                                    Pls select From 1 to 5
-                                </div>
-
                                 <div className="flex justify-between items-start gap-1 px-1">
                                     {RATING_OPTIONS.map((opt) => {
                                         const isSelected = scores[q.id] === opt.value;
@@ -503,10 +499,15 @@
                                         )
                                     })}
                                 </div>
-                                <div className={`flex justify-between px-2 mt-2 text-xs font-bold text-[#7c746e] uppercase tracking-wider opacity-80 ${lang === 'hi' ? 'hindi-font' : ''}`}>
-                                    <span>{t(UI_TEXT.disagree)}</span>
-                                    <span>{t(UI_TEXT.balance)}</span>
-                                    <span>{t(UI_TEXT.agree)}</span>
+                                <div className={`flex justify-between px-2 mt-2 text-[10px] font-bold text-[#7c746e] uppercase tracking-wider opacity-80 ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                    <div className="flex flex-col items-start">
+                                        <span>{t({en: "Strongly", hi: "पूर्णतः"})}</span>
+                                        <span>{t({en: "Disagree", hi: "असहमत"})}</span>
+                                    </div>
+                                    <div className="flex flex-col items-end">
+                                        <span>{t({en: "Strongly", hi: "पूर्णतः"})}</span>
+                                        <span>{t({en: "Agree", hi: "सहमत"})}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -519,47 +520,58 @@
                 const primary = lowestChakras[0];
                 const secondary = lowestChakras[1];
 
+                // INVERT SCORES FOR BLOCKAGE DISPLAY (100 - Harmony = Blockage)
+                const blockageScore = 100 - finalResults.GrandTotal;
+
                 return (
                     <div className="h-full overflow-y-auto custom-scrollbar p-6 animate-enter flex flex-col relative">
                         <div className="max-w-xl mx-auto w-full flex-1 flex flex-col pt-6 pb-12"> 
                             
-                            <div className="text-center mb-6">
-                                <h1 className="text-2xl font-serif text-[#3e3a36] mb-1">SoulSync</h1>
-                                <p className={`text-[#7c746e] text-xs uppercase tracking-widest ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.subtitle)}</p>
+                            <div className="text-center mb-8">
+                                <h1 className="text-3xl font-serif text-[#3e3a36] mb-2">SoulSync</h1>
+                                <p className={`text-[#7c746e] text-sm uppercase tracking-widest ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.subtitle)}</p>
                             </div>
 
                             {/* UNIFIED DASHBOARD CONTAINER */}
-                            <div className="dashboard-container mb-6 grid grid-cols-2 divide-x divide-y divide-stone-200/50">
+                            <div className="dashboard-container mb-8 grid grid-cols-2 divide-x divide-y divide-stone-200/50">
                                 
-                                {/* TOP LEFT: HARMONY SCORE */}
-                                <div className="p-4 flex flex-col items-center justify-center text-center">
-                                    <h2 className={`text-xs text-[#3e3a36] mb-1 font-bold`}>{t(UI_TEXT.harmonyScore)}</h2>
-                                    <p className={`text-[#7c746e] text-[8px] uppercase tracking-widest mb-2 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.alignment)}</p>
-                                    <div className="text-5xl font-bold tracking-tighter mb-1 text-[#3e3a36]">
-                                        {finalResults.GrandTotal}
+                                {/* TOP LEFT: OVERALL BLOCKAGE */}
+                                <div className="p-6 flex flex-col items-center justify-center text-center">
+                                    <h2 className={`text-sm text-[#3e3a36] mb-2 font-bold ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.harmonyScore)}</h2>
+                                    
+                                    <div className="text-6xl font-bold tracking-tighter mb-1 text-[#3e3a36]">
+                                        {blockageScore}%
                                     </div>
-                                    <div className={`text-[#7c746e] text-[8px] uppercase tracking-widest ${lang === 'hi' ? 'hindi-font' : ''}`}>
-                                        {t(UI_TEXT.outOf)}
+                                    <div className={`text-[#7c746e] text-[10px] uppercase tracking-widest ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                        {t({en: "Blockage Level", hi: "अवरोध स्तर"})}
                                     </div>
                                 </div>
 
                                 {/* TOP RIGHT: CHAKRA LIST */}
-                                <div className="p-4 flex flex-col justify-center">
-                                    <h3 className={`text-[10px] font-bold text-[#7c746e] uppercase tracking-widest mb-3 ${lang === 'hi' ? 'hindi-font' : ''}`}>
-                                        {lang === 'hi' ? 'चक्र स्कोर' : 'Chakra Scores'}
+                                <div className="p-6 flex flex-col justify-center">
+                                    <h3 className={`text-xs font-bold text-[#7c746e] uppercase tracking-widest mb-4 ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                        {lang === 'hi' ? 'चक्र-वार अवरोध :' : 'Chakra-Wise Blockage :'}
                                     </h3>
-                                    <div className="space-y-2">
+                                    <div className="space-y-2.5">
                                         {CHAKRA_DATA.map((chakra) => {
-                                            const score = finalResults[chakra.name['en']] || 0;
+                                            const harmonyScore = finalResults[chakra.name['en']] || 0;
+                                            const blockage = 100 - harmonyScore; // Invert for display
+                                            
+                                            // Determine color based on blockage severity
+                                            let scoreColor = "text-[#7c746e]";
+                                            if (blockage > 70) scoreColor = "text-rose-600 font-bold";
+                                            else if (blockage > 40) scoreColor = "text-orange-500 font-semibold";
+                                            else scoreColor = "text-emerald-600";
+
                                             return (
                                                 <div key={chakra.id} className="flex items-center justify-between">
-                                                    <div className="flex items-center gap-2">
-                                                        <div className={`w-3 h-3 rounded-full flex items-center justify-center ${chakra.colorClass}`}>
-                                                            {chakra.logo("w-2 h-2")}
+                                                    <div className="flex items-center gap-3">
+                                                        <div className={`w-4 h-4 rounded-full flex items-center justify-center ${chakra.colorClass}`}>
+                                                            {chakra.logo("w-2.5 h-2.5")}
                                                         </div>
-                                                        <span className={`text-[10px] text-[#3e3a36] font-medium leading-none ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(chakra.name)}</span>
+                                                        <span className={`text-xs text-[#3e3a36] font-medium leading-none ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(chakra.name)}</span>
                                                     </div>
-                                                    <span className="text-[10px] font-bold text-[#7c746e]">{score}</span>
+                                                    <span className={`text-xs ${scoreColor}`}>{blockage}%</span>
                                                 </div>
                                             )
                                         })}
@@ -567,38 +579,50 @@
                                 </div>
 
                                 {/* BOTTOM LEFT: PRIMARY BLOCK */}
-                                <div className="p-4 flex flex-col items-center relative overflow-hidden">
-                                     <div className={`w-10 h-10 rounded-full mb-2 flex items-center justify-center ${primary.colorClass}`}>
-                                        {primary.logo("w-5 h-5")}
-                                    </div>
-                                    <div className="text-center mb-2">
-                                        <div className={`text-[8px] uppercase tracking-widest text-[#9fbcd3] font-bold mb-0.5 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.primaryBlock)}</div>
-                                        <div className={`text-sm font-medium text-[#3e3a36] leading-tight mb-0.5 ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(primary.name)}</div>
-                                        <div className="text-[9px] text-[#7c746e] italic">{primary.sanskrit}</div>
-                                    </div>
-                                    <ul className={`text-[9px] text-[#5d5854] space-y-1 text-center w-full ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                <div className="p-6 flex flex-col justify-start relative overflow-hidden text-left">
+                                     <div className={`text-[10px] uppercase tracking-widest text-[#9fbcd3] font-bold mb-3 ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                         {t(UI_TEXT.primaryBlock)}
+                                     </div>
+                                     
+                                     <div className="flex items-center gap-3 mb-4">
+                                         <div className={`w-12 h-12 shrink-0 rounded-full flex items-center justify-center ${primary.colorClass}`}>
+                                            {primary.logo("w-6 h-6")}
+                                        </div>
+                                        <div>
+                                            <div className={`text-base font-medium text-[#3e3a36] leading-tight mb-0.5 ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(primary.name)}</div>
+                                            <div className="text-[10px] text-[#7c746e] italic">{primary.sanskrit}</div>
+                                        </div>
+                                     </div>
+
+                                    <ul className={`text-[11px] text-[#5d5854] space-y-1.5 w-full ${lang === 'hi' ? 'hindi-font' : ''}`}>
                                         {t(primary.descPoints).map((pt, i) => <li key={i}>• {pt}</li>)}
                                     </ul>
                                 </div>
 
                                 {/* BOTTOM RIGHT: SECONDARY BLOCK */}
-                                <div className="p-4 flex flex-col items-center relative overflow-hidden">
-                                    <div className={`w-10 h-10 rounded-full mb-2 flex items-center justify-center ${secondary.colorClass}`}>
-                                        {secondary.logo("w-5 h-5")}
+                                <div className="p-6 flex flex-col justify-start relative overflow-hidden text-left">
+                                    <div className={`text-[10px] uppercase tracking-widest text-[#d1b676] font-bold mb-3 ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                        {t(UI_TEXT.secondaryBlock)}
                                     </div>
-                                    <div className="text-center mb-2">
-                                        <div className={`text-[8px] uppercase tracking-widest text-[#d1b676] font-bold mb-0.5 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.secondaryBlock)}</div>
-                                        <div className={`text-sm font-medium text-[#3e3a36] leading-tight mb-0.5 ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(secondary.name)}</div>
-                                        <div className="text-[9px] text-[#7c746e] italic">{secondary.sanskrit}</div>
+
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <div className={`w-12 h-12 shrink-0 rounded-full flex items-center justify-center ${secondary.colorClass}`}>
+                                            {secondary.logo("w-6 h-6")}
+                                        </div>
+                                        <div>
+                                            <div className={`text-base font-medium text-[#3e3a36] leading-tight mb-0.5 ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(secondary.name)}</div>
+                                            <div className="text-[10px] text-[#7c746e] italic">{secondary.sanskrit}</div>
+                                        </div>
                                     </div>
-                                    <ul className={`text-[9px] text-[#5d5854] space-y-1 text-center w-full ${lang === 'hi' ? 'hindi-font' : ''}`}>
+
+                                    <ul className={`text-[11px] text-[#5d5854] space-y-1.5 w-full ${lang === 'hi' ? 'hindi-font' : ''}`}>
                                         {t(secondary.descPoints).map((pt, i) => <li key={i}>• {pt}</li>)}
                                     </ul>
                                 </div>
 
                             </div>
 
-                            <button onClick={() => setView('healing_path')} className="action-btn w-full py-4 rounded-xl font-bold text-sm shadow-sm hover:shadow-md">
+                            <button onClick={() => setView('healing_path')} className="action-btn w-full py-5 rounded-xl font-bold text-sm shadow-sm hover:shadow-md">
                                 {t(UI_TEXT.healingPathBtn)} →
                             </button>
 
@@ -692,16 +716,19 @@
 
             // 5. FULL RESULTS
             if (view === 'full_results' && finalResults) {
+                // INVERT SCORE FOR FULL RESULTS TOO
+                const totalBlockage = 100 - finalResults.GrandTotal;
+                
                 return (
                     <div className="h-full overflow-y-auto custom-scrollbar p-6 animate-enter relative">
                         <div className="max-w-md mx-auto pt-4 pb-20">
                             
                             <div className="soft-card p-10 rounded-[2.5rem] text-center mb-6 relative overflow-hidden">
                                 <h2 className={`text-2xl text-[#3e3a36] mb-1 ${lang === 'hi' ? 'hindi-font font-bold' : 'font-serif'}`}>{t(UI_TEXT.harmonyScore)}</h2>
-                                <p className={`text-[#7c746e] text-xs uppercase tracking-widest mb-6 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.alignment)}</p>
+                                <p className={`text-[#7c746e] text-xs uppercase tracking-widest mb-6 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t({en: "Overall Blockage", hi: "कुल अवरोध"})}</p>
                                 
                                 <div className="text-8xl font-bold tracking-tighter mb-2 text-[#3e3a36]">
-                                    {finalResults.GrandTotal}
+                                    {totalBlockage}%
                                 </div>
                                 <div className={`text-[#7c746e] text-[10px] uppercase tracking-widest ${lang === 'hi' ? 'hindi-font' : ''}`}>
                                     {t(UI_TEXT.outOf)}
@@ -713,7 +740,8 @@
                             </div>
                             <div className="space-y-3">
                                 {CHAKRA_DATA.map((chakra) => {
-                                    const score = finalResults[chakra.name['en']] || 0;
+                                    const harmonyScore = finalResults[chakra.name['en']] || 0;
+                                    const blockage = 100 - harmonyScore;
                                     
                                     return (
                                         <div key={chakra.id} className="soft-card p-4 rounded-2xl flex items-center gap-4 transition-colors">
@@ -723,10 +751,11 @@
                                             <div className="flex-1">
                                                 <div className="flex justify-between text-[10px] font-bold uppercase tracking-wider mb-2">
                                                     <span className={`text-[#3e3a36] ${lang === 'hi' ? 'hindi-font font-semibold text-xs' : ''}`}>{t(chakra.name)}</span>
-                                                    <span className="text-[#7c746e]">{score}</span>
+                                                    <span className="text-[#7c746e]">{blockage}%</span>
                                                 </div>
                                                 <div className="h-1.5 w-full bg-[#3e3a36]/10 rounded-full overflow-hidden">
-                                                    <div className={`h-full ${chakra.barColor}`} style={{width: `${score}%`}}></div>
+                                                    {/* Bar width represents blockage */}
+                                                    <div className={`h-full ${chakra.barColor}`} style={{width: `${blockage}%`}}></div>
                                                 </div>
                                             </div>
                                         </div>
