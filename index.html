@@ -506,20 +506,61 @@
 
                 return (
                     <div className="h-full overflow-y-auto custom-scrollbar p-6 animate-enter flex flex-col relative">
-                        <div className="max-w-md mx-auto w-full flex-1 flex flex-col pt-6 pb-12">
+                        <div className="max-w-3xl mx-auto w-full flex-1 flex flex-col pt-6 pb-12"> 
+                            
                             <div className="text-center mb-6">
                                 <h1 className="text-2xl font-serif text-[#3e3a36] mb-1">SoulSync</h1>
                                 <p className={`text-[#7c746e] text-xs uppercase tracking-widest ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.subtitle)}</p>
                             </div>
 
-                            <div className="soft-card p-6 rounded-[1.5rem] relative overflow-hidden">
-                                <h2 className={`text-lg text-center mb-6 text-[#3e3a36] ${lang === 'hi' ? 'hindi-font font-bold' : 'font-serif'}`}>
-                                    {lang === 'hi' ? 'ऊर्जा अवरोध मिले' : 'Energy Blocks Detected'}
-                                </h2>
+                            {/* TOP ROW */}
+                            <div className="flex flex-col md:flex-row gap-4 mb-4">
+                                
+                                {/* LEFT: HARMONY SCORE CARD */}
+                                <div className="w-full md:w-1/2 soft-card p-6 rounded-[1.5rem] flex flex-col items-center justify-center text-center relative overflow-hidden">
+                                    <h2 className={`text-lg text-[#3e3a36] mb-1 ${lang === 'hi' ? 'hindi-font font-bold' : 'font-serif'}`}>{t(UI_TEXT.harmonyScore)}</h2>
+                                    <p className={`text-[#7c746e] text-[10px] uppercase tracking-widest mb-4 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.alignment)}</p>
+                                    <div className="text-7xl font-bold tracking-tighter mb-2 text-[#3e3a36]">
+                                        {finalResults.GrandTotal}
+                                    </div>
+                                    <div className={`text-[#7c746e] text-[10px] uppercase tracking-widest ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                        {t(UI_TEXT.outOf)}
+                                    </div>
+                                </div>
 
-                                {/* Primary Block */}
-                                <div className="mb-6 pb-6 border-b border-[#e6dbd2]">
-                                    <div className={`w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center ${primary.colorClass}`}>
+                                {/* RIGHT: CHAKRA TABLE (No Lines) */}
+                                <div className="w-full md:w-1/2 soft-card p-6 rounded-[1.5rem]">
+                                    <h3 className={`text-sm font-bold text-[#7c746e] uppercase tracking-widest mb-4 ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                        {lang === 'hi' ? 'चक्र स्कोर' : 'Chakra Scores'}
+                                    </h3>
+                                    <div className="space-y-3">
+                                        {CHAKRA_DATA.map((chakra) => {
+                                            const score = finalResults[chakra.name['en']] || 0;
+                                            return (
+                                                <div key={chakra.id} className="flex items-center justify-between">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className={`w-6 h-6 rounded-full flex items-center justify-center ${chakra.colorClass}`}>
+                                                            {chakra.logo("w-3 h-3")}
+                                                        </div>
+                                                        <span className={`text-xs text-[#3e3a36] font-medium ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(chakra.name)}</span>
+                                                    </div>
+                                                    <span className="text-xs font-bold text-[#7c746e]">{score}</span>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* BOTTOM ROW: BLOCKS */}
+                            <h2 className={`text-lg text-center mb-4 mt-2 text-[#3e3a36] ${lang === 'hi' ? 'hindi-font font-bold' : 'font-serif'}`}>
+                                {lang === 'hi' ? 'ऊर्जा अवरोध मिले' : 'Energy Blocks Detected'}
+                            </h2>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                {/* PRIMARY BLOCK */}
+                                <div className="soft-card p-6 rounded-[1.5rem] relative overflow-hidden">
+                                     <div className={`w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center ${primary.colorClass}`}>
                                         {primary.logo("w-6 h-6")}
                                     </div>
                                     <div className="text-center mb-3">
@@ -527,13 +568,13 @@
                                         <div className={`text-lg font-medium text-[#3e3a36] ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(primary.name)}</div>
                                         <div className="text-sm text-[#7c746e] italic">{primary.sanskrit}</div>
                                     </div>
-                                    <ul className={`text-sm text-[#5d5854] space-y-1.5 px-4 text-center ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                    <ul className={`text-xs text-[#5d5854] space-y-1.5 px-2 text-center ${lang === 'hi' ? 'hindi-font' : ''}`}>
                                         {t(primary.descPoints).map((pt, i) => <li key={i}>• {pt}</li>)}
                                     </ul>
                                 </div>
 
-                                {/* Secondary Block */}
-                                <div className="mb-8">
+                                {/* SECONDARY BLOCK */}
+                                <div className="soft-card p-6 rounded-[1.5rem] relative overflow-hidden">
                                     <div className={`w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center ${secondary.colorClass}`}>
                                         {secondary.logo("w-6 h-6")}
                                     </div>
@@ -542,15 +583,16 @@
                                         <div className={`text-lg font-medium text-[#3e3a36] ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(secondary.name)}</div>
                                         <div className="text-sm text-[#7c746e] italic">{secondary.sanskrit}</div>
                                     </div>
-                                    <ul className={`text-sm text-[#5d5854] space-y-1.5 px-4 text-center ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                    <ul className={`text-xs text-[#5d5854] space-y-1.5 px-2 text-center ${lang === 'hi' ? 'hindi-font' : ''}`}>
                                         {t(secondary.descPoints).map((pt, i) => <li key={i}>• {pt}</li>)}
                                     </ul>
                                 </div>
-
-                                <button onClick={() => setView('healing_path')} className="action-btn w-full py-3.5 rounded-xl font-bold text-sm shadow-sm hover:shadow-md">
-                                    {t(UI_TEXT.healingPathBtn)} →
-                                </button>
                             </div>
+
+                            <button onClick={() => setView('healing_path')} className="action-btn w-full py-4 rounded-xl font-bold text-sm shadow-sm hover:shadow-md">
+                                {t(UI_TEXT.healingPathBtn)} →
+                            </button>
+
                         </div>
                     </div>
                 );
