@@ -121,6 +121,7 @@
             beginBtn: { en: "Begin Analysis", hi: "विश्लेषण प्रारंभ करें" },
             question: { en: "Question", hi: "प्रश्न" },
             disagree: { en: "Disagree", hi: "असहमत" },
+            balance: { en: "Balance", hi: "संतुलन" },
             agree: { en: "Agree", hi: "सहमत" },
             primaryBlock: { en: "Primary Block", hi: "मुख्य अवरोध" },
             secondaryBlock: { en: "Secondary Block", hi: "द्वितीयक अवरोध" },
@@ -390,7 +391,15 @@
                             </div>
                             
                             <h1 className="text-4xl font-bold mb-3 serif-font text-[#3e3a36]">SoulSync</h1>
-                            <p className="text-[#7c746e] mb-10 text-sm font-light tracking-wide uppercase">A Reflection of Your Chakra</p>
+                            
+                            <div className="mb-10 flex flex-col items-center gap-2">
+                                <p className="text-[#7c746e] text-sm font-medium leading-relaxed max-w-[260px]">
+                                    Check What's Stopping You From Progressing Ahead in Life
+                                </p>
+                                <p className="text-[#d1b676] text-[10px] font-bold tracking-[0.2em] uppercase opacity-80">
+                                    AI Assistant Reflection
+                                </p>
+                            </div>
                             
                             <button onClick={() => setView('lang_select')} className="action-btn w-full py-4 rounded-xl font-medium text-sm shadow-md flex items-center justify-center gap-2">
                                 Begin Analysis <Icons.ArrowRight />
@@ -458,23 +467,30 @@
                                         {t(q.text)}
                                     </h2>
                                 </div>
+                                
+                                <div className="text-center text-xs text-[#7c746e] mb-3 font-medium">
+                                    Pls select From 1 to 5
+                                </div>
 
-                                <div className="flex justify-between items-center gap-2 px-1">
+                                <div className="flex justify-between items-start gap-1 px-1">
                                     {RATING_OPTIONS.map((opt) => {
                                         const isSelected = scores[q.id] === opt.value;
                                         return (
-                                            <button 
-                                                key={opt.value}
-                                                onClick={() => handleAnswer(opt.value)}
-                                                className={`rating-btn w-12 h-12 rounded-full soft-card flex items-center justify-center text-[#7c746e] ${isSelected ? 'selected' : ''}`}
-                                            >
-                                                {opt.icon()}
-                                            </button>
+                                            <div key={opt.value} className="flex flex-col items-center gap-2">
+                                                <button 
+                                                    onClick={() => handleAnswer(opt.value)}
+                                                    className={`rating-btn w-12 h-12 rounded-full soft-card flex items-center justify-center text-[#7c746e] ${isSelected ? 'selected' : ''}`}
+                                                >
+                                                    {opt.icon()}
+                                                </button>
+                                                <span className="text-xs font-medium text-[#7c746e]">{opt.value}</span>
+                                            </div>
                                         )
                                     })}
                                 </div>
-                                <div className={`flex justify-between px-3 mt-4 text-[9px] font-bold text-[#7c746e] uppercase tracking-wider opacity-60 ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                <div className={`flex justify-between px-2 mt-2 text-xs font-bold text-[#7c746e] uppercase tracking-wider opacity-80 ${lang === 'hi' ? 'hindi-font' : ''}`}>
                                     <span>{t(UI_TEXT.disagree)}</span>
+                                    <span>{t(UI_TEXT.balance)}</span>
                                     <span>{t(UI_TEXT.agree)}</span>
                                 </div>
                             </div>
