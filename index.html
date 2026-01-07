@@ -402,11 +402,11 @@
                             <h1 className="text-4xl font-bold mb-3 serif-font text-[#3e3a36]">SoulSync</h1>
                             
                             <div className="mb-10 flex flex-col items-center gap-2">
+                                <p className="text-[#d1b676] text-[10px] font-bold tracking-[0.2em] uppercase opacity-80">
+                                    AI Empowered Reflection
+                                </p>
                                 <p className="text-[#7c746e] text-sm font-medium leading-relaxed max-w-[260px] italic">
                                     Check What's Stopping You From Progressing Ahead in Life
-                                </p>
-                                <p className="text-[#d1b676] text-[10px] font-bold tracking-[0.2em] uppercase opacity-80">
-                                    AI Assistant Reflection
                                 </p>
                             </div>
                             
@@ -465,14 +465,20 @@
 
                         <div className="flex-1 flex flex-col justify-center px-6 pb-12">
                             <div key={animKey} className="animate-enter w-full">
-                                <div className="soft-card p-8 md:p-10 rounded-[2rem] mb-10 text-center min-h-[300px] flex flex-col justify-center items-center relative shadow-sm">
-                                    <span className={`absolute top-6 text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-full ${q.colorClass} ${lang === 'hi' ? 'hindi-font' : ''}`}>
-                                        {t(q.chakraName)}
-                                    </span>
-                                    <div className={`mb-6 p-4 rounded-full ${q.colorClass} opacity-90`}>
-                                        {q.chakraLogo("w-8 h-8")}
+                                <div className="soft-card p-8 md:p-10 rounded-[2rem] mb-10 min-h-[300px] flex flex-col justify-center relative shadow-sm">
+                                    
+                                    {/* Header: Icon (Left) + Name (Bigger) */}
+                                    <div className="flex items-center gap-4 mb-8">
+                                        <div className={`p-3 rounded-full ${q.colorClass} opacity-90`}>
+                                            {q.chakraLogo("w-6 h-6")}
+                                        </div>
+                                        <span className={`text-lg font-bold uppercase tracking-widest text-[#7c746e] ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                            {t(q.chakraName)}
+                                        </span>
                                     </div>
-                                    <h2 className={`text-xl md:text-2xl leading-relaxed text-[#3e3a36] ${lang === 'hi' ? 'hindi-font font-medium' : 'font-serif'}`}>
+
+                                    {/* Question Text */}
+                                    <h2 className={`text-xl md:text-2xl leading-relaxed text-[#3e3a36] text-left ${lang === 'hi' ? 'hindi-font font-medium' : 'font-serif'}`}>
                                         {t(q.text)}
                                     </h2>
                                 </div>
