@@ -393,7 +393,7 @@
                             <h1 className="text-4xl font-bold mb-3 serif-font text-[#3e3a36]">SoulSync</h1>
                             
                             <div className="mb-10 flex flex-col items-center gap-2">
-                                <p className="text-[#7c746e] text-sm font-medium leading-relaxed max-w-[260px]">
+                                <p className="text-[#7c746e] text-sm font-medium leading-relaxed max-w-[260px] italic">
                                     Check What's Stopping You From Progressing Ahead in Life
                                 </p>
                                 <p className="text-[#d1b676] text-[10px] font-bold tracking-[0.2em] uppercase opacity-80">
@@ -514,37 +514,37 @@
                             </div>
 
                             {/* TOP ROW */}
-                            <div className="flex flex-col md:flex-row gap-4 mb-4">
+                            <div className="flex flex-row gap-2 md:gap-4 mb-4">
                                 
                                 {/* LEFT: HARMONY SCORE CARD */}
-                                <div className="w-full md:w-1/2 soft-card p-6 rounded-[1.5rem] flex flex-col items-center justify-center text-center relative overflow-hidden">
-                                    <h2 className={`text-lg text-[#3e3a36] mb-1 ${lang === 'hi' ? 'hindi-font font-bold' : 'font-serif'}`}>{t(UI_TEXT.harmonyScore)}</h2>
-                                    <p className={`text-[#7c746e] text-[10px] uppercase tracking-widest mb-4 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.alignment)}</p>
-                                    <div className="text-7xl font-bold tracking-tighter mb-2 text-[#3e3a36]">
+                                <div className="w-1/2 soft-card p-4 md:p-6 rounded-[1.5rem] flex flex-col items-center justify-center text-center relative overflow-hidden">
+                                    <h2 className={`text-xs md:text-lg text-[#3e3a36] mb-1 ${lang === 'hi' ? 'hindi-font font-bold' : 'font-serif'}`}>{t(UI_TEXT.harmonyScore)}</h2>
+                                    <p className={`text-[#7c746e] text-[8px] md:text-[10px] uppercase tracking-widest mb-2 md:mb-4 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.alignment)}</p>
+                                    <div className="text-5xl md:text-7xl font-bold tracking-tighter mb-2 text-[#3e3a36]">
                                         {finalResults.GrandTotal}
                                     </div>
-                                    <div className={`text-[#7c746e] text-[10px] uppercase tracking-widest ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                    <div className={`text-[#7c746e] text-[8px] md:text-[10px] uppercase tracking-widest ${lang === 'hi' ? 'hindi-font' : ''}`}>
                                         {t(UI_TEXT.outOf)}
                                     </div>
                                 </div>
 
                                 {/* RIGHT: CHAKRA TABLE (No Lines) */}
-                                <div className="w-full md:w-1/2 soft-card p-6 rounded-[1.5rem]">
-                                    <h3 className={`text-sm font-bold text-[#7c746e] uppercase tracking-widest mb-4 ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                <div className="w-1/2 soft-card p-4 md:p-6 rounded-[1.5rem]">
+                                    <h3 className={`text-[10px] md:text-sm font-bold text-[#7c746e] uppercase tracking-widest mb-2 md:mb-4 ${lang === 'hi' ? 'hindi-font' : ''}`}>
                                         {lang === 'hi' ? 'चक्र स्कोर' : 'Chakra Scores'}
                                     </h3>
-                                    <div className="space-y-3">
+                                    <div className="space-y-2 md:space-y-3">
                                         {CHAKRA_DATA.map((chakra) => {
                                             const score = finalResults[chakra.name['en']] || 0;
                                             return (
                                                 <div key={chakra.id} className="flex items-center justify-between">
-                                                    <div className="flex items-center gap-3">
-                                                        <div className={`w-6 h-6 rounded-full flex items-center justify-center ${chakra.colorClass}`}>
-                                                            {chakra.logo("w-3 h-3")}
+                                                    <div className="flex items-center gap-2 md:gap-3">
+                                                        <div className={`w-4 h-4 md:w-6 md:h-6 rounded-full flex items-center justify-center ${chakra.colorClass}`}>
+                                                            {chakra.logo("w-2 h-2 md:w-3 md:h-3")}
                                                         </div>
-                                                        <span className={`text-xs text-[#3e3a36] font-medium ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(chakra.name)}</span>
+                                                        <span className={`text-[10px] md:text-xs text-[#3e3a36] font-medium whitespace-nowrap overflow-hidden text-ellipsis max-w-[60px] md:max-w-none ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(chakra.name)}</span>
                                                     </div>
-                                                    <span className="text-xs font-bold text-[#7c746e]">{score}</span>
+                                                    <span className="text-[10px] md:text-xs font-bold text-[#7c746e]">{score}</span>
                                                 </div>
                                             )
                                         })}
@@ -557,33 +557,33 @@
                                 {lang === 'hi' ? 'ऊर्जा अवरोध मिले' : 'Energy Blocks Detected'}
                             </h2>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div className="grid grid-cols-2 gap-2 md:gap-4 mb-6">
                                 {/* PRIMARY BLOCK */}
-                                <div className="soft-card p-6 rounded-[1.5rem] relative overflow-hidden">
-                                     <div className={`w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center ${primary.colorClass}`}>
-                                        {primary.logo("w-6 h-6")}
+                                <div className="soft-card p-4 md:p-6 rounded-[1.5rem] relative overflow-hidden">
+                                     <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full mx-auto mb-2 md:mb-3 flex items-center justify-center ${primary.colorClass}`}>
+                                        {primary.logo("w-5 h-5 md:w-6 md:h-6")}
                                     </div>
-                                    <div className="text-center mb-3">
-                                        <div className={`text-xs uppercase tracking-widest text-[#9fbcd3] font-bold mb-1 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.primaryBlock)}</div>
-                                        <div className={`text-lg font-medium text-[#3e3a36] ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(primary.name)}</div>
-                                        <div className="text-sm text-[#7c746e] italic">{primary.sanskrit}</div>
+                                    <div className="text-center mb-2 md:mb-3">
+                                        <div className={`text-[8px] md:text-xs uppercase tracking-widest text-[#9fbcd3] font-bold mb-1 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.primaryBlock)}</div>
+                                        <div className={`text-sm md:text-lg font-medium text-[#3e3a36] ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(primary.name)}</div>
+                                        <div className="text-[10px] md:text-sm text-[#7c746e] italic">{primary.sanskrit}</div>
                                     </div>
-                                    <ul className={`text-xs text-[#5d5854] space-y-1.5 px-2 text-center ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                    <ul className={`text-[10px] md:text-xs text-[#5d5854] space-y-1 px-1 text-center ${lang === 'hi' ? 'hindi-font' : ''}`}>
                                         {t(primary.descPoints).map((pt, i) => <li key={i}>• {pt}</li>)}
                                     </ul>
                                 </div>
 
                                 {/* SECONDARY BLOCK */}
-                                <div className="soft-card p-6 rounded-[1.5rem] relative overflow-hidden">
-                                    <div className={`w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center ${secondary.colorClass}`}>
-                                        {secondary.logo("w-6 h-6")}
+                                <div className="soft-card p-4 md:p-6 rounded-[1.5rem] relative overflow-hidden">
+                                    <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full mx-auto mb-2 md:mb-3 flex items-center justify-center ${secondary.colorClass}`}>
+                                        {secondary.logo("w-5 h-5 md:w-6 md:h-6")}
                                     </div>
-                                    <div className="text-center mb-3">
-                                        <div className={`text-xs uppercase tracking-widest text-[#d1b676] font-bold mb-1 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.secondaryBlock)}</div>
-                                        <div className={`text-lg font-medium text-[#3e3a36] ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(secondary.name)}</div>
-                                        <div className="text-sm text-[#7c746e] italic">{secondary.sanskrit}</div>
+                                    <div className="text-center mb-2 md:mb-3">
+                                        <div className={`text-[8px] md:text-xs uppercase tracking-widest text-[#d1b676] font-bold mb-1 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.secondaryBlock)}</div>
+                                        <div className={`text-sm md:text-lg font-medium text-[#3e3a36] ${lang === 'hi' ? 'hindi-font' : 'font-serif'}`}>{t(secondary.name)}</div>
+                                        <div className="text-[10px] md:text-sm text-[#7c746e] italic">{secondary.sanskrit}</div>
                                     </div>
-                                    <ul className={`text-xs text-[#5d5854] space-y-1.5 px-2 text-center ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                    <ul className={`text-[10px] md:text-xs text-[#5d5854] space-y-1 px-1 text-center ${lang === 'hi' ? 'hindi-font' : ''}`}>
                                         {t(secondary.descPoints).map((pt, i) => <li key={i}>• {pt}</li>)}
                                     </ul>
                                 </div>
