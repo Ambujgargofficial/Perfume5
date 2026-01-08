@@ -347,6 +347,10 @@
             const [showRegForm, setShowRegForm] = useState(false);
             const [regSubmitted, setRegSubmitted] = useState(false);
             const [formData, setFormData] = useState({ name: '', contact: '', email: '' });
+            
+            // --- SESSION ID GENERATION ---
+            // Create a unique ID once per session so we can update the same row
+            const [sessionId] = useState(() => 'sid_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9));
 
             // Helper for Text
             const t = (obj) => obj[lang] || obj['en'];
@@ -408,12 +412,13 @@
                 setFinalResults(finalData);
                 setLowestChakras(bottomTwo);
                 
-                // AUTOMATIC FETCH FOR DROP-OFFS
-                // Captures users who reach results but close tab/do not proceed
+                // --- AUTO CAPTURE RESULT (CREATE NEW ROW) ---
+                // This creates the initial row with type "AUTO_RESULT"
                 fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST', mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
+                        sessionId: sessionId, // SEND SESSION ID
                         timestamp: new Date().toISOString(), 
                         name: "Anonymous", 
                         type: "AUTO_RESULT", 
@@ -434,11 +439,13 @@
             const handleRegSubmit = (e) => {
                 e.preventDefault();
                 setRegSubmitted(true);
-                // Send Lead Data to Google Sheet (2nd Entry for High Value Leads)
+                // --- UPDATE ROW WITH LEAD DATA ---
+                // Uses same sessionId to find and update the existing row
                 fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST', mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
+                        sessionId: sessionId, // SEND SESSION ID
                         timestamp: new Date().toISOString(), 
                         type: "LEAD",
                         lang: lang, 
@@ -449,8 +456,25 @@
             };
 
             const handleExit = () => {
-                // Data already sent automatically on load, just reload page
-                window.location.reload();
+                // --- UPDATE ROW WITH QUIZ_ONLY STATUS ---
+                // Uses same sessionId to update status before reload
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST', mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        sessionId: sessionId, // SEND SESSION ID
+                        timestamp: new Date().toISOString(), 
+                        name: "Anonymous", 
+                        type: "QUIZ_ONLY",
+                        lang: lang, 
+                        ...finalResults 
+                    })
+                }).catch(console.error);
+
+                // Slight delay to allow request to fire
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
             };
 
             const handleInputChange = (e) => {
