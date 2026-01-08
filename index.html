@@ -408,10 +408,18 @@
                 setFinalResults(finalData);
                 setLowestChakras(bottomTwo);
                 
+                // AUTOMATIC FETCH FOR DROP-OFFS
+                // Captures users who reach results but close tab/do not proceed
                 fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST', mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ timestamp: new Date().toISOString(), name: "Anonymous", ...finalData })
+                    body: JSON.stringify({ 
+                        timestamp: new Date().toISOString(), 
+                        name: "Anonymous", 
+                        type: "AUTO_RESULT", 
+                        lang: lang, 
+                        ...finalData 
+                    })
                 }).catch(console.error);
 
                 setView('energy_analysis');
@@ -426,17 +434,23 @@
             const handleRegSubmit = (e) => {
                 e.preventDefault();
                 setRegSubmitted(true);
-                // Send Lead Data to Google Sheet
+                // Send Lead Data to Google Sheet (2nd Entry for High Value Leads)
                 fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST', mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
                         timestamp: new Date().toISOString(), 
                         type: "LEAD",
+                        lang: lang, 
                         ...formData, 
                         ...finalResults 
                     })
                 }).catch(console.error);
+            };
+
+            const handleExit = () => {
+                // Data already sent automatically on load, just reload page
+                window.location.reload();
             };
 
             const handleInputChange = (e) => {
@@ -587,7 +601,7 @@
 
                             {/* UNIFIED DASHBOARD CONTAINER */}
                             <div className="dashboard-container mb-8 grid grid-cols-2 divide-x divide-y divide-stone-200/50">
-                                {/* ... (Chart Content Remains Same) ... */}
+                                
                                 {/* TOP LEFT: OVERALL BLOCKAGE */}
                                 <div className="p-6 flex flex-col items-center justify-center text-center">
                                     <h2 className={`text-sm text-[#3e3a36] mb-2 font-bold ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.harmonyScore)}</h2>
@@ -849,7 +863,7 @@
                                     <button onClick={() => setShowRegForm(true)} className="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold text-sm shadow-md flex items-center justify-center gap-2 hover:bg-emerald-700 transition-colors">
                                         {t(UI_TEXT.joinBtn)}
                                     </button>
-                                    <button onClick={() => window.location.reload()} className="w-full border border-rose-200 text-rose-700 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-rose-50 transition-colors">
+                                    <button onClick={handleExit} className="w-full border border-rose-200 text-rose-700 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-rose-50 transition-colors">
                                         <Icons.Exit /> {t(UI_TEXT.exitBtn)}
                                     </button>
                                 </div>
