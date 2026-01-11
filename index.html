@@ -132,7 +132,7 @@
 
         // --- TRANSLATION DICTIONARY ---
         const UI_TEXT = {
-            subtitle: { en: "AI Empowered Reflection", hi: "आपके चक्रों का प्रतिबिंब" },
+            subtitle: { en: "A Reflection of Your Chakra", hi: "आपके चक्रों का प्रतिबिंब" },
             beginBtn: { en: "Begin Analysis", hi: "विश्लेषण प्रारंभ करें" },
             question: { en: "Question", hi: "प्रश्न" },
             disagree: { en: "Strongly Disagree", hi: "पूर्णतः असहमत" },
@@ -464,7 +464,13 @@
 
             const handleGuideSelection = (choice) => {
                 setGuideChoice(choice);
-                setShowRegForm(false);
+                if (choice === 'yes') {
+                    // Directly show form if Yes
+                    setShowRegForm(true);
+                } else {
+                    // Show Benefits/Missed Opportunities screen if No
+                    setShowRegForm(false);
+                }
                 setView('ai_guide_intro');
             };
 
@@ -800,6 +806,250 @@
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                );
+            }
+
+            // 3.5 AI GUIDE INTRO (New Screen)
+            if (view === 'ai_guide_intro') {
+                
+                // --- THANK YOU STATE ---
+                if (regSubmitted) {
+                    return (
+                        <div className="h-full flex flex-col items-center justify-center p-8 animate-enter text-center">
+                            <div className="soft-card p-10 rounded-[2rem] w-full max-w-sm flex flex-col items-center">
+                                <div className="mb-6 p-4 bg-emerald-50 rounded-full shadow-sm text-emerald-600">
+                                    <Icons.CheckCircle />
+                                </div>
+                                <h2 className={`text-xl font-serif text-[#3e3a36] leading-relaxed ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                    {t(UI_TEXT.thankYou)}
+                                </h2>
+                                <button onClick={() => window.location.reload()} className="mt-8 text-xs text-[#7c746e] uppercase tracking-widest hover:text-[#3e3a36] transition-colors">
+                                    Return to Home
+                                </button>
+                            </div>
+                        </div>
+                    );
+                }
+
+                // --- REGISTRATION FORM STATE ---
+                // If showRegForm is true (Which it is directly for Yes), show form
+                if (showRegForm) {
+                    return (
+                        <div className="h-full flex flex-col items-center justify-center p-6 animate-enter">
+                            <div className="soft-card p-8 rounded-[2rem] w-full max-w-sm relative">
+                                {/* If user clicked "Yes", closing form takes them back to benefits? Or if from "Join" btn */}
+                                <button onClick={() => setShowRegForm(false)} className="absolute top-6 right-6 text-[#7c746e] hover:text-[#3e3a36]">✕</button>
+                                
+                                <div className="text-center mb-6">
+                                    <div className="inline-flex p-3 bg-white rounded-full shadow-sm text-[#d1b676] mb-3">
+                                        <Icons.User />
+                                    </div>
+                                    <h2 className={`text-lg font-bold text-[#3e3a36] ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.registerBtn)}</h2>
+                                </div>
+
+                                <form onSubmit={handleRegSubmit} className="space-y-4">
+                                    <div>
+                                        <label className={`block text-xs font-bold text-[#7c746e] uppercase tracking-wider mb-1 ml-1 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.formName)}</label>
+                                        <div className="relative">
+                                            <input 
+                                                required
+                                                type="text" 
+                                                name="name"
+                                                value={formData.name}
+                                                onChange={handleInputChange}
+                                                className="w-full bg-white/60 border border-[#e6dbd2] rounded-xl py-3 pl-10 pr-4 text-sm text-[#3e3a36] focus:outline-none focus:border-[#d1b676] transition-colors"
+                                                placeholder="..."
+                                            />
+                                            <div className="absolute left-3 top-3 text-[#7c746e] opacity-50"><Icons.User /></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className={`block text-xs font-bold text-[#7c746e] uppercase tracking-wider mb-1 ml-1 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.formContact)}</label>
+                                        <div className="relative">
+                                            <input 
+                                                required
+                                                type="tel" 
+                                                name="contact"
+                                                value={formData.contact}
+                                                onChange={handleInputChange}
+                                                className="w-full bg-white/60 border border-[#e6dbd2] rounded-xl py-3 pl-10 pr-4 text-sm text-[#3e3a36] focus:outline-none focus:border-[#d1b676] transition-colors"
+                                                placeholder="+91..."
+                                            />
+                                            <div className="absolute left-3 top-3 text-[#7c746e] opacity-50"><Icons.Phone /></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className={`block text-xs font-bold text-[#7c746e] uppercase tracking-wider mb-1 ml-1 ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.formMail)}</label>
+                                        <div className="relative">
+                                            <input 
+                                                type="email" 
+                                                name="email"
+                                                value={formData.email}
+                                                onChange={handleInputChange}
+                                                className="w-full bg-white/60 border border-[#e6dbd2] rounded-xl py-3 pl-10 pr-4 text-sm text-[#3e3a36] focus:outline-none focus:border-[#d1b676] transition-colors"
+                                                placeholder="@..."
+                                            />
+                                            <div className="absolute left-3 top-3 text-[#7c746e] opacity-50"><Icons.Mail /></div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" className="action-btn w-full py-4 rounded-xl font-bold text-sm shadow-md mt-4">
+                                        {t(UI_TEXT.submitBtn)}
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    )
+                }
+
+                // --- STANDARD SELECTION VIEW (Only shown for "No" logic now, or if form closed) ---
+                const isYes = guideChoice === 'yes'; 
+                // Since we auto-show form for 'yes', this part is mostly for 'no' case 
+                // BUT if they close the form (X), they might land here with isYes=true. 
+                // So we keep the benefits logic intact for that edge case.
+                
+                const benefits = [
+                    "AI As Your Private Healer",
+                    "Bespoke Rituals, Not Generic",
+                    "Wisdom Of 5000 Years Of Vedic Knowledge",
+                    "Proof Of Progress You Can See",
+                    "Your Personal Coach Always Available On 24 X 7"
+                ];
+
+                const containerClass = isYes 
+                    ? "bg-emerald-50/50 border-emerald-100" 
+                    : "bg-rose-50/50 border-rose-100";
+                
+                const iconColor = isYes ? "text-emerald-600" : "text-rose-600 opacity-60";
+                
+                return (
+                    <div className="h-full flex flex-col items-center justify-center p-8 animate-enter relative">
+                        <div className={`soft-card p-8 rounded-[2rem] w-full max-w-sm flex flex-col items-center relative overflow-hidden ${containerClass}`}>
+                            
+                            <div className={`mb-6 p-4 bg-white rounded-full shadow-sm ${iconColor}`}>
+                                {isYes ? <Icons.Sparkles /> : <Icons.Alert />}
+                            </div>
+
+                            <h2 className={`text-xl font-serif text-[#3e3a36] mb-6 text-center leading-tight ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                {isYes ? t(UI_TEXT.gettingTitle) : t(UI_TEXT.missingTitle)}
+                            </h2>
+
+                            <ul className="w-full space-y-4 mb-8">
+                                {benefits.map((benefit, i) => (
+                                    <li key={i} className="flex items-start gap-3 text-sm text-[#5d5854]">
+                                        <span className={`mt-0.5 shrink-0 ${iconColor}`}>
+                                            {isYes ? 
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 
+                                                : 
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                            }
+                                        </span>
+                                        <span className={!isYes ? "opacity-70" : ""}>{benefit}</span>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            {isYes ? (
+                                <button onClick={() => setShowRegForm(true)} className="w-full bg-[#3e3a36] text-[#f4ede7] py-4 rounded-xl font-bold text-sm shadow-md flex items-center justify-center gap-2 hover:bg-black transition-colors">
+                                    <Icons.Sparkles /> {t(UI_TEXT.registerBtn)}
+                                </button>
+                            ) : (
+                                <div className="flex flex-col w-full gap-3">
+                                    <button onClick={() => setShowRegForm(true)} className="w-full bg-emerald-600 text-white py-4 rounded-xl font-bold text-sm shadow-md flex items-center justify-center gap-2 hover:bg-emerald-700 transition-colors">
+                                        {t(UI_TEXT.joinBtn)}
+                                    </button>
+                                    <button onClick={handleExit} className="w-full border border-rose-200 text-rose-700 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-rose-50 transition-colors">
+                                        <Icons.Exit /> {t(UI_TEXT.exitBtn)}
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                );
+            }
+
+            // 4. HEALING PATH
+            if (view === 'healing_path' && lowestChakras.length >= 2) {
+                const c1 = lowestChakras[0];
+                const c2 = lowestChakras[1];
+                
+                // Get first name safely for display
+                const getName = (c) => t(c.name).split(' ')[0];
+
+                return (
+                    <div className="h-full overflow-y-auto custom-scrollbar p-6 animate-enter flex flex-col relative">
+                        <div className="max-w-md mx-auto w-full flex-1 flex flex-col pt-6 pb-12">
+                            <div className="text-center mb-6">
+                                <h1 className="text-2xl font-serif text-[#3e3a36] mb-1">SoulSync</h1>
+                                <p className={`text-[#7c746e] text-xs uppercase tracking-widest ${lang === 'hi' ? 'hindi-font' : ''}`}>{t(UI_TEXT.healingTitle)}</p>
+                            </div>
+
+                            <div className="soft-card p-6 rounded-[1.5rem]">
+                                <div className="text-center mb-6">
+                                    <h2 className={`text-lg mb-1 text-[#3e3a36] ${lang === 'hi' ? 'hindi-font font-bold' : 'font-serif'}`}>{t(UI_TEXT.personalized)}</h2>
+                                    <div className={`text-xs text-[#7c746e] ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                        {lang === 'hi' ? 
+                                            `${getName(c1)} और ${getName(c2)} ${t(UI_TEXT.chakras)}` : 
+                                            `For Your ${getName(c1)} & ${getName(c2)} Chakras`}
+                                    </div>
+                                </div>
+
+                                <div className="flex justify-center gap-4 mb-8">
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${c1.colorClass}`}>{c1.logo("w-5 h-5")}</div>
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${c2.colorClass}`}>{c2.logo("w-5 h-5")}</div>
+                                </div>
+
+                                {/* Material Healing */}
+                                <div className="mb-6">
+                                    <h4 className={`text-lg mb-2 text-[#3e3a36] ${lang === 'hi' ? 'hindi-font font-bold' : 'font-serif'}`}>{t(UI_TEXT.material)}</h4>
+                                    <div className={`bg-white/60 rounded-xl p-4 text-sm text-[#5d5854] leading-relaxed border border-[#e6dbd2] ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                        <div className="mb-3">
+                                            <strong className="text-[#3e3a36] block mb-1">{t(UI_TEXT.crystals)}</strong>
+                                            • {t(c1.healing.crystal)} ({getName(c1)})<br/>
+                                            • {t(c2.healing.crystal)} ({getName(c2)})
+                                        </div>
+                                        <div>
+                                            <strong className="text-[#3e3a36] block mb-1">{t(UI_TEXT.aroma)}</strong>
+                                            • {t(c1.healing.aroma)}<br/>
+                                            • {t(c2.healing.aroma)}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Breath & Meditation */}
+                                <div className="mb-6">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <h4 className={`text-lg text-[#3e3a36] ${lang === 'hi' ? 'hindi-font font-bold' : 'font-serif'}`}>{t(UI_TEXT.breath)}</h4>
+                                        <div className={`flex items-center gap-1 text-[10px] uppercase tracking-widest text-[#7c746e] cursor-pointer hover:text-[#3e3a36] ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                            <Icons.Audio /> {t(UI_TEXT.playAudio)}
+                                        </div>
+                                    </div>
+                                    <div className={`bg-white/60 rounded-xl p-4 text-sm text-[#5d5854] italic text-center border border-[#e6dbd2] ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                        "{t(c1.healing.meditation)}"
+                                        <br/><br/>
+                                        "{t(c2.healing.meditation)}"
+                                    </div>
+                                </div>
+
+                                {/* Gentle Practice */}
+                                <div className="mb-8">
+                                    <h4 className={`text-lg mb-2 text-[#3e3a36] ${lang === 'hi' ? 'hindi-font font-bold' : 'font-serif'}`}>{t(UI_TEXT.gentle)}</h4>
+                                    <div className={`bg-white/60 rounded-xl p-4 text-sm text-[#5d5854] border border-[#e6dbd2] ${lang === 'hi' ? 'hindi-font' : ''}`}>
+                                        <ul className="space-y-2">
+                                            <li>• {t(c1.healing.practice)}</li>
+                                            <li>• {t(c2.healing.practice)}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <button onClick={() => setView('full_results')} className="action-btn w-full py-3.5 rounded-xl font-bold text-sm shadow-sm hover:shadow-md">
+                                    {t(UI_TEXT.exploreBtn)} →
+                                </button>
+                            </div>
                         </div>
                     </div>
                 );
